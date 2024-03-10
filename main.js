@@ -22,7 +22,7 @@ const products = [
   {
     name: 'Cuadro de gatos',
     price: 49.99,
-    seller: 'AwesomeSeller',
+    seller: 'FantasticSeller',
     linktoprod:
       'https://www.etsy.com/es/listing/1597244136/arte-de-pared-de-dos-gatos-en-la-parte?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=Cuadros+de+gatos&ref=sc_gallery-1-8&pro=1&rs=1&sts=1&search_preloaded_img=1&plkey=671417ca2306ecaf3f2b6b3300637463203eea3e%3A1597244136',
     image:
@@ -31,7 +31,7 @@ const products = [
   {
     name: 'Kitty Socks',
     price: 9.99,
-    seller: 'AwesomeSeller',
+    seller: 'FantasticSeller',
     linktoprod:
       'https://www.etsy.com/es/listing/1431107486/calcetines-de-talla-unica-para-mujeres?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=Calcetines+de+gatos&ref=sr_gallery-1-3&es=1&organic_search_click=1',
     image:
@@ -102,10 +102,7 @@ const products = [
   }
 ]
 let sellers = []
-//log the products
-// console.log(products)
 
-//create a function to render the products
 const CreateProducts = (product_list) => {
   if (product_list.length === 0) {
     const productsContainer = document.querySelector('#products')
@@ -118,20 +115,16 @@ const CreateProducts = (product_list) => {
     productCard.innerHTML = `
       <img src="${product.image}" alt="${product.name}" />
       <h2>${product.name}</h2>
-      <p>${product.price}€</p>
-      <p>${product.seller}</p>
+      <p class="pricep">${product.price}</p>
+      <p class="sellerp">${product.seller}</p>
       <a href="${product.linktoprod}" target="_blank">Ver producto</a>
-
     `
-    console.log(product.price)
-    console.log(typeof product.price)
     productsContainer.appendChild(productCard)
   })
 }
 
 const CreateHeader = () => {
   const header = document.querySelector('header')
-
   header.innerHTML = `
   <span class="shop_name">KittyShop VITE</span>
   <img src="./assets/menu.png" alt="menu" class="menu">
@@ -162,8 +155,28 @@ const MakeSidebar = () => {
     <button id="reset">Reset</button>
     </div>
   `
-  console.log('añadimos los elementos')
+}
 
+const MakeFooter = () => {
+  const footer = document.querySelector('footer')
+  footer.innerHTML = `
+  <ul class="socials">
+            <li><img src="./assets/instagram.png" alt="Redes"></li>
+            <li><img src="./assets/tik-tok.png" alt="Redes"></li>
+            <li><img src="./assets/x.png" alt="Redes"></li>
+            <li><img src="./assets/youtube.png" alt="Redes"></li>
+        </ul>
+        <p>© 2021 KittyShop VITE</p>
+        <ul>
+            <li>Privacidad</li>
+            <li>Tiendas</li>
+            <li>Anuncios</li>
+            <li>Regiones</li>
+        </ul>
+  `
+}
+
+const AddEvents = () => {
   document.querySelector('#seller').addEventListener('change', () => {
     const SelectedSeller = document.querySelector('#seller').value
     if (SelectedSeller == 'All') {
@@ -202,7 +215,6 @@ const MakeSidebar = () => {
   })
 }
 
-//extract the unique sellers
 const ExtractSellers = (products) => {
   const sellers = []
   products.forEach((product) => {
@@ -210,15 +222,18 @@ const ExtractSellers = (products) => {
       sellers.push(product.seller)
     }
   })
-  //push the unique sellers to the select
   const select = document.querySelector('#seller')
   sellers.forEach((seller) => {
-    console.log(seller)
+    const option = document.createElement('option')
+    option.value = seller
+    option.textContent = seller
+    select.appendChild(option)
   })
-  return sellers
 }
 
-ExtractSellers(products)
 CreateProducts(products)
 CreateHeader()
 MakeSidebar()
+ExtractSellers(products)
+AddEvents()
+MakeFooter()
