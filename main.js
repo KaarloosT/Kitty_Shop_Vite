@@ -161,10 +161,11 @@ const MakeFooter = () => {
   const footer = document.querySelector('footer')
   footer.innerHTML = `
   <ul class="socials">
-            <li><img src="./assets/instagram.png" alt="Redes"></li>
-            <li><img src="./assets/tik-tok.png" alt="Redes"></li>
-            <li><img src="./assets/x.png" alt="Redes"></li>
-            <li><img src="./assets/youtube.png" alt="Redes"></li>
+            <li><img src="https://benevolent-gumption-d5158a.netlify.app/assets/instagram.png" alt="Redes"></li>
+            <li><img src="https://benevolent-gumption-d5158a.netlify.app/assets/x.png" alt="Redes"></li>
+            <li><img src="https://benevolent-gumption-d5158a.netlify.app/assets/tik-tok.png" alt="Redes"></li>
+            <li><img src="https://benevolent-gumption-d5158a.netlify.app/assets/youtube.png
+            " alt="Redes"></li>
         </ul>
         <p>© 2021 KittyShop VITE</p>
         <ul>
