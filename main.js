@@ -127,7 +127,7 @@ const CreateHeader = () => {
   const header = document.querySelector('header')
   header.innerHTML = `
   <span class="shop_name">KittyShop VITE</span>
-  <img src="./assets/menu.png" alt="menu" class="menu">
+  <img src="https://benevolent-gumption-d5158a.netlify.app/assets/menu.png" alt="menu" class="menu">
   <nav>
       <ul class="menu_list">
           <li><a href="#">Inicio</a></li>
