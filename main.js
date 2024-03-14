@@ -179,31 +179,11 @@ const MakeFooter = () => {
 
 const AddEvents = () => {
   document.querySelector('#seller').addEventListener('change', () => {
-    const SelectedSeller = document.querySelector('#seller').value
-    if (SelectedSeller == 'All') {
-      const productsContainer = document.querySelector('#products')
-      productsContainer.innerHTML = ''
-      CreateProducts(products)
-    } else {
-      const productsContainer = document.querySelector('#products')
-      productsContainer.innerHTML = ''
-      const filteredProducts = products.filter(
-        (product) => product.seller === SelectedSeller
-      )
-      CreateProducts(filteredProducts)
-    }
+    FilterItems()
   })
 
   document.querySelector('#search').addEventListener('click', () => {
-    const minPrice = Number(document.querySelector('#minPrice').value)
-    //convert the string to a number
-    const productsContainer = document.querySelector('#products')
-    productsContainer.innerHTML = ''
-    console.log(typeof minPrice)
-    const filteredProducts = products.filter(
-      (product) => Number(product.price) < minPrice
-    )
-    CreateProducts(filteredProducts)
+    FilterItems()
   })
 
   document.querySelector('#reset').addEventListener('click', () => {
@@ -230,6 +210,46 @@ const ExtractSellers = (products) => {
     option.textContent = seller
     select.appendChild(option)
   })
+}
+
+const FilterItems = () => {
+  const price = document.querySelector('#minPrice').value
+  const SelectedSeller = document.querySelector('#seller').value
+
+  if (price === '' && SelectedSeller === 'All') {
+    CreateProducts(products)
+    console.log('no hay ningun filtro')
+  }
+
+  if (price !== '' && SelectedSeller === 'All') {
+    const filteredProducts = products.filter(
+      (product) => product.price <= price
+    )
+    const productsContainer = document.querySelector('#products')
+    productsContainer.innerHTML = ''
+    CreateProducts(filteredProducts)
+    console.log('filtramos solo por precio')
+  }
+
+  if (price === '' && SelectedSeller !== 'All') {
+    const filteredProducts = products.filter(
+      (product) => product.seller === SelectedSeller
+    )
+    const productsContainer = document.querySelector('#products')
+    productsContainer.innerHTML = ''
+    CreateProducts(filteredProducts)
+    console.log('filtramos solo por vendedor')
+  }
+
+  if (price !== '' && SelectedSeller !== 'All') {
+    const filteredProducts = products.filter(
+      (product) => product.seller === SelectedSeller && product.price <= price
+    )
+    const productsContainer = document.querySelector('#products')
+    productsContainer.innerHTML = ''
+    CreateProducts(filteredProducts)
+    console.log('filtramos por vendedor y precio')
+  }
 }
 
 CreateProducts(products)
